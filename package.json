@@ -4,6 +4,7 @@
   "description": "log handling app",
   "main": "index.js",
   "scripts": {
+    "start": "node_modules/nodemon/bin/nodemon.js app.js",
     "test": "jest"
   },
   "author": "gurpreet",
