@@ -1,0 +1,48 @@
+
+> logging-app@1.0.0 test /home/kaliuser/node-logging-app
+> jest
+
+FAIL ./bst.test.js
+  ● Console
+
+    console.log node_modules/jest-jasmine2/build/jasmine/Env.js:520
+        ● Test suite failed to run
+      
+          A "describe" callback must not return a value.
+          Returning a value from "describe" will fail the test in a future version of Jest.
+      
+            2 | 
+            3 | 
+          > 4 | describe("test the lookup method in trivial trees", () => {
+              | ^
+            5 | 
+            6 |     const t = new BST();
+            7 | 
+      
+            at addSpecsToSuite (node_modules/jest-jasmine2/build/jasmine/Env.js:522:17)
+            at Object.describe (bst.test.js:4:1)
+      
+
+  ● test the lookup method in trivial trees › encountered a declaration exception
+
+    TypeError: BST is not a constructor
+
+      4 | describe("test the lookup method in trivial trees", () => {
+      5 | 
+    > 6 |     const t = new BST();
+        |               ^
+      7 | 
+      8 |     test("lookup in empty list should return null", () => {
+      9 |         expect(t.lookup("1")).toBe(null);
+
+      at Suite.Object.<anonymous>.describe (bst.test.js:6:15)
+      at Object.describe (bst.test.js:4:1)
+
+PASS ./queue.test.js
+
+Test Suites: 1 failed, 1 passed, 2 total
+Tests:       1 failed, 13 passed, 14 total
+Snapshots:   0 total
+Time:        1.14s
+Ran all test suites.
+npm ERR! Test failed.  See above for more details.

@@ -1,0 +1,12 @@
+
+> logging-app@1.0.0 test /home/kaliuser/node-logging-app
+> jest
+
+PASS ./bst.test.js
+PASS ./queue.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       15 passed, 15 total
+Snapshots:   0 total
+Time:        1.303s
+Ran all test suites.
