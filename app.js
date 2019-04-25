@@ -5,6 +5,10 @@ const path = require('path');
 
 const winston = require('winston');
 
+const fs = require('fs');
+const checkFilesize = require('./check-filesize-process');
+
+
 const app =express();
 const Queue = require('./queue');
 
@@ -129,6 +133,8 @@ app.post('/*', (req, res) => {
 // variable to hold the csp-report that is sent by browser formatted as a standard CSP report
 // For more information  refer https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP#Violation_report_syntax
    
+    checkFilesize();
+
     const report = req.body;
     let log = {};
     if (report){
