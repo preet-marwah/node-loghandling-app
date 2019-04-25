@@ -1,0 +1,25 @@
+
+> logging-app@1.0.0 test /home/kaliuser/node-logging-app
+> jest
+
+PASS ./queue.test.js
+  test the length method
+    ✓ list initially empty (4ms)
+    ✓ adding nodes increases length (1ms)
+    ✓ remove decreases length
+    ✓ add increases length
+    ✓ remove decreases length (1ms)
+  queue max length of 1 item
+    ✓ sequence (1ms)
+  remove items in FIFO order
+    ✓ queue has up to 2 items (1ms)
+    ✓ queue has many items (1ms)
+    ✓ stress test (51ms)
+  toArray()
+    ✓ list empty (1ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       10 passed, 10 total
+Snapshots:   0 total
+Time:        1.154s, estimated 2s
+Ran all test suites.

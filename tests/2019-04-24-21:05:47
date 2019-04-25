@@ -1,0 +1,41 @@
+
+> logging-app@1.0.0 test /home/kaliuser/node-logging-app
+> jest
+
+FAIL ./queue.test.js
+  test the length method
+    ✓ list initially empty (9ms)
+    ✓ adding nodes increases length (3ms)
+    ✓ remove decreases length (2ms)
+    ✓ add increases length (2ms)
+    ✓ remove decreases length (2ms)
+  queue max length of 1 item
+    ✓ sequence (2ms)
+  remove items in FIFO order
+    ✓ queue has up to 2 items (3ms)
+    ✓ queue has many items (2ms)
+    ✓ stress test (125ms)
+  toArray()
+    ✕ list empty (8ms)
+
+  ● toArray() › list empty
+
+    ReferenceError: thisItem is not defined
+
+      80 | 
+      81 |         let thisNode = this.first;
+    > 82 |         while (thisItem !== null){
+         |                        ^
+      83 |             result.push(thisNode.value);
+      84 |             thisNode = thisNode.after;
+      85 |         }
+
+      at Queue.toArray (queue.js:82:24)
+      at Object.toArray (queue.test.js:136:18)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 9 passed, 10 total
+Snapshots:   0 total
+Time:        2.506s
+Ran all test suites.
+npm ERR! Test failed.  See above for more details.
