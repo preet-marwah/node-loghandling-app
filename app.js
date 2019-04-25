@@ -64,6 +64,12 @@ app.use(bodyParser.urlencoded({extended: false}));
         // using this with path.join is safer than the option that doesn't
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/data.js', (req, res) => {
+    const object = logCache.toArray();
+
+    res.send(`var logList = ${JSON.stringify(object)};`);
+});
+
 //function to create the log object out of the JSON object report
 // attributes required id, timestamp, severity and violated-directive
 
