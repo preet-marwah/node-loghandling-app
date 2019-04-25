@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Log Handler App</title>
-</head>
-<body>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Log Manager</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+        
+      
+    </head>
+    <body>
     
-</body>
+        <script id="entry-template" type="text/x-handlebars-template">
+                
+                <table id=logTable>
+                        <tr class="header">
+                            <th>ID</th>
+                            <th>Severity</th>
+                            <th>Report Type</th>
+                            <th>Timestamp</th>
+                
+                        </tr>
+                        {{#each logs}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{severity}}</td>
+                            <td>{{reportType}}</td>
+                            <td>{{timestamp}}</td>
+                        </tr>
+                        {{/each}}
+                </table>
+        
+    
+        </script>
+        <div id="Display">
+                <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search for names..">
+    
+        </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js" type="text/javascript"></script>
+        <script src="index.js"></script>
+    </body>
+
 </html>
