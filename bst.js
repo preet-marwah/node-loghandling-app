@@ -70,7 +70,30 @@ class BST {
             return null;
         }
     }
+    range(k1, k2) {
 
+        // given a node, return an array of all values
+        // of this node and descendants whose keys are between k1 and k2
+        // (sorted by key)
+        function queryHelper(node, k1, k2) {
+            if (node === null) {
+                return [];
+            }
+            const leftList = queryHelper(node.left, k1, k2);
+            const rightList = queryHelper(node.right, k1, k2);
+
+            let newArray = leftList;
+            if (node.key >= k1 && node.key <= k2) {
+                newArray.push(node.value);
+            }
+            newArray = newArray.concat(rightList);
+
+            return newArray;
+        };
+
+        return queryHelper(this.root, k1, k2);
+
+    }
 
 }
 module.exports = BST;
