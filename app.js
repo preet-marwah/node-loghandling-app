@@ -3,7 +3,42 @@ const bodyParser = require('body-parser');
 
 const path = require('path');
 
+const winston = require('winston');
+
 const app =express();
+const Queue = require('./queue');
+
+
+const levels = {
+    HIGH: 0,
+    MODERATE: 1,
+    UNKNOWN: 2,
+};
+
+const myFormat = winston.format.printf((log) => {
+    return `${log.severity}: ${JSON.stringify(log, null, 4)}\n--------------\n`;
+});
+
+const logger = winston.createLogger({
+  level: 'UNKNOWN',
+  levels: levels,
+  format: winston.format.json(),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    //
+    // - Write to all logs with level `info` and below to `combined.log`
+    // - Write all logs error (and below) to `error.log`.
+    //
+    new winston.transports.File({
+                filename: 'reports.log',
+                maxsize: 10000,
+                format: myFormat,
+            }),
+    new winston.transports.Console({
+                format: myFormat,
+            }),
+  ]
+});
 
 //process.env.PORT lets the port to be set by Heroku
 const port = process.env.PORT || 3000;
@@ -72,7 +107,20 @@ function createLog(report) {
     };
     return newLog;
 }
+// A cache storing the most recent 1000 events
+const logCache = new Queue();
 
+// adds a log object to the queue, oldest logs are removed and saved to file
+// after queue size exceeds 1000
+function queueLog(log) {
+
+    logCache.add(log);
+    while (logCache.length() > 1000) {
+        const oldestLog = logCache.remove();
+        logger.log(oldestLog.severity, oldestLog);
+    }
+
+}
 
 // route
 // handles post requests to any url
@@ -80,13 +128,16 @@ app.post('/*', (req, res) => {
 
 // variable to hold the csp-report that is sent by browser formatted as a standard CSP report
 // For more information  refer https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP#Violation_report_syntax
-    console.log(req.body);
+   
     const report = req.body;
+    let log = {};
     if (report){
-    const log = createLog(report);
-    console.log(log);
+     log = createLog(report);
     } 
-res.end();
+
+    queueLog (log);
+
+    res.end();
 
 });
 
